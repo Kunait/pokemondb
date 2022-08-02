@@ -1,21 +1,59 @@
 import Model.*;
 import ModelInterpreter.HelpfulMethods;
 import ModelInterpreter.PokemonDataReader;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MainController {
+public class MainController extends Application {
 
+    public static int pokemonID;
+    public static String pokemonName;
+    public static Stage stage;
 
+    public MainController()  {
 
-    public MainController() throws IOException, InterruptedException {
-        runMain();
     }
 
-    private void runMain() throws IOException, InterruptedException {
+    @Override
+    public void start(Stage stage) throws Exception {
+
+
+
+
+        Parent select = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("select.fxml")));
+
+        Scene scene = new Scene(select);
+        MainController.stage = stage;
+        stage.setScene(scene);
+        stage.setTitle("PokeAPI Implementation by Cüneyd");
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
+        stage.show();
+
+
+
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    /*private void runMain() throws IOException, InterruptedException {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Gib eine ID ein");
@@ -122,4 +160,3 @@ public class MainController {
     }
 
 
-}

@@ -1,5 +1,7 @@
 package Model;
 
+import ModelInterpreter.HelpfulMethods;
+
 public class Fahigkeit {
 
     String name;
@@ -25,5 +27,14 @@ public class Fahigkeit {
     }
 
     public Fahigkeit() {
+    }
+
+    @Override
+    public String toString(){
+
+
+        return "Level "+level+": "+HelpfulMethods.capitalizeFirst(name) ;
+
+
     }
 }

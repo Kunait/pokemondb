@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PokemonDataReader {
 
-    private PokemonResult pokemon;
+    public PokemonResult pokemon;
 
 
     public PokemonDataReader(PokemonResult pokemon) {
@@ -39,6 +39,8 @@ public class PokemonDataReader {
 
         return versions;
     }
+
+
 
     public ArrayList<Fahigkeit> getAbilitiesWithLvlGeneration(GenerationsEnum e){
 

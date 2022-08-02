@@ -1,5 +1,7 @@
 package Model;
 
+import ModelInterpreter.HelpfulMethods;
+
 public class BegegnungsDaten {
 
 
@@ -38,5 +40,14 @@ public class BegegnungsDaten {
 
     public void setBegegnung(BegegnungResult begegnung) {
         this.begegnung = begegnung;
+    }
+
+
+    @Override
+    public String toString(){
+
+        return "In "+HelpfulMethods.capitalizeFirst(region.getName())+ ": "+ HelpfulMethods.capitalizeFirst(location.getName());
+
+
     }
 }

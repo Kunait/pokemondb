@@ -3,6 +3,7 @@
 
 import Model.*;
 import com.google.gson.Gson;
+import javafx.scene.image.Image;
 
 import java.io.*;
 import java.net.URI;
@@ -16,9 +17,27 @@ public class RequestHandler {
     private static final HttpClient client = HttpClient.newHttpClient();
 
 
+    public static Image getImage(int pokemonID) throws IOException, InterruptedException {
 
+        //https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/600.png
+
+        HttpResponse<byte[]> response = client.send(HttpRequest.newBuilder(URI.create("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemonID+".png")).GET().build(),HttpResponse.BodyHandlers.ofByteArray());
+        byte[] imageByte = response.body();
+        Image image = new Image(new ByteArrayInputStream(imageByte));
+
+
+        return image;
+    }
 
     public static PokemonResult getPokemonResultByID(int pokemonID) throws IOException, InterruptedException {
+
+        HttpResponse<String> response = client.send(HttpRequest.newBuilder(URI.create("https://pokeapi.co/api/v2/pokemon/"+pokemonID)).GET().build(),HttpResponse.BodyHandlers.ofString());
+
+        PokemonResult result = new Gson().fromJson(response.body(), PokemonResult.class);
+
+        return result;
+    }
+    public static PokemonResult getPokemonResultByName(String pokemonID) throws IOException, InterruptedException {
 
         HttpResponse<String> response = client.send(HttpRequest.newBuilder(URI.create("https://pokeapi.co/api/v2/pokemon/"+pokemonID)).GET().build(),HttpResponse.BodyHandlers.ofString());
 

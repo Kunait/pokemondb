@@ -8,15 +8,9 @@ public class Main {
     public static void main(String[] args){
 
 
+        MainController.main(args);
 
 
-        try {
-            MainController controller = new MainController();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

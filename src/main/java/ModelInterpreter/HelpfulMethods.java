@@ -94,6 +94,20 @@ public class HelpfulMethods {
         return null;
     }
 
+    public static int enumGenerationToIntRegion(GenerationsEnum e){
+        switch (e) {
+            case ONE -> {return 1;}
+            case TWO -> {return 2;}
+            case THREE -> {return 3;}
+            case FOUR -> {return 4;}
+            case FIVE -> { return 5;}
+            case SIX -> {return 6;}
+            case SEVEN -> {return 7;}
+            case EIGHT -> {return 8;}
+        }
+        return 0;
+    }
+
     public static GenerationsEnum intGenerationToEnum(int e){
 
         switch (e) {
