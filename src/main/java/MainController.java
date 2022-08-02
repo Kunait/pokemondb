@@ -38,6 +38,7 @@ public class MainController {
         System.out.println("Fetching Data...");
         System.out.println("In this Generation "+HelpfulMethods.capitalizeFirst(pr.getName())+ " has the Pokedex ID "+((pr.getIDInRegion(HelpfulMethods.intRegionToEnum(generation)) != -1) ? pr.getIDInRegion(HelpfulMethods.intRegionToEnum(generation)) : pr.getID()));
         System.out.println("In this Generation "+HelpfulMethods.capitalizeFirst(pr.getName())+ " learns the following moves:");
+
         Thread x =new Thread(new Runnable() {
             @Override
             public void run() {
@@ -51,6 +52,9 @@ public class MainController {
             }
         });
         x.start();
+
+        x.join();
+
         ArrayList<BegegnungsDaten> daten = new ArrayList<>();
        Thread t = new Thread(new Runnable() {
             @Override
@@ -66,14 +70,14 @@ public class MainController {
         });
 
         t.start();
-        x.join();
+
         System.out.println("You can find this Pokemon in these Locations: ");
-        t.join(5000);
+        t.join();
 
         for(BegegnungsDaten d: daten){
 
 
-            System.out.println(HelpfulMethods.capitalizeFirst(d.getRegion().getName())+ " in "+HelpfulMethods.capitalizeFirst(d.getLocation().getName())+ " in "+ d.getBegegnung().getName());
+            System.out.println(HelpfulMethods.capitalizeFirst(d.getRegion().getName())+ " in "+HelpfulMethods.capitalizeFirst(d.getLocation().getName()));
 
 
 

@@ -31,28 +31,44 @@ public class BegegnungDataReader {
         RegionErgebnis region = RequestHandler.getRegionByID(regID);
         ArrayList<BegegnungsDaten> daten = new ArrayList<>();
 
-        for(LocationsItem i: region.getLocations()){
+        region.getLocations().forEach(locationsItem -> {
+            int locID = Integer.parseInt(locationsItem.getUrl().replaceFirst("https://pokeapi.co/api/v2/location/","").replace("/",""));
+            LocationErgebnis location;
+            try {
+                 location = RequestHandler.getLocationByID(locID);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
-            int locID = Integer.parseInt(i.getUrl().replaceFirst("https://pokeapi.co/api/v2/location/","").replace("/",""));
 
-            LocationErgebnis location = RequestHandler.getLocationByID(locID);
+            location.getAreas().forEach(areasItem -> {
 
-            for(AreasItem j: location.getAreas()){
+                int areaID = Integer.parseInt(areasItem.getUrl().replaceFirst("https://pokeapi.co/api/v2/location-area/","").replace("/",""));
+                BegegnungResult begegnungResult;
+                try {
+                     begegnungResult = RequestHandler.getEncounterResultByID(areaID);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-                int areaID = Integer.parseInt(j.getUrl().replaceFirst("https://pokeapi.co/api/v2/location-area/","").replace("/",""));
+                begegnungResult.getPokemonEncounters().forEach(pokemonEncountersItem -> {
 
-                BegegnungResult begegnungResult = RequestHandler.getEncounterResultByID(areaID);
-                for(PokemonEncountersItem k : begegnungResult.getPokemonEncounters()){
-
-                    if (k.getPokemon().getName().equals(pokemonName)){
+                    if (pokemonEncountersItem.getPokemon().getName().equals(pokemonName)){
                         //System.out.println("Pokemon "+pokemonName+ " kann man in der Region "+region.getName()+" hier finden: "+i.getName()+ " in der Area "+j.getName());
                         daten.add(new BegegnungsDaten(region,location,begegnungResult));
                     }
-                }
 
 
-            }
+                });
 
-        }
+
+            });
+
+        });
+
         return daten;
 }}

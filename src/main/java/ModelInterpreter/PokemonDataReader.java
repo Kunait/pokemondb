@@ -106,13 +106,21 @@ public class PokemonDataReader {
         }
 
     public int firstGeneration(){
-        int first = 1;
+        int first = -1;
+        String temp;
+        String temp2;
 
         for (int i = 1; i <9 ; i++) {
 
             assert HelpfulMethods.enumGenerationGetLastGames(HelpfulMethods.intGenerationToEnum(i)) != null;
-            if(pokemon.getMoves().get(0).getVersionGroupDetails().get(0).getVersionGroup().getName().contains(HelpfulMethods.enumGenerationGetLastGames(HelpfulMethods.intGenerationToEnum(i)))){
-                return first;
+
+            for (int j = 0; j< pokemon.getGameIndices().size();j++) {
+                 temp = pokemon.getGameIndices().get(j).getVersion().getName();
+                 temp2 = HelpfulMethods.enumGenerationGetLastGames(HelpfulMethods.intGenerationToEnum(i));
+                if (temp2.contains(temp)) { //pokemon.getMoves().get(0).getVersionGroupDetails().get(0).getVersionGroup().getName().contains(HelpfulMethods.enumGenerationGetLastGames(HelpfulMethods.intGenerationToEnum(i)))
+                    first = i;
+                    return first;
+                }
             }
 
             first = i;
