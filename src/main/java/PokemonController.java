@@ -13,11 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +47,9 @@ public class PokemonController implements Initializable {
 
     @FXML
     ChoiceBox<GenerationsEnum> generation;
+
+    @FXML
+    Button back;
 
 
     ArrayList<Fahigkeit> fahigkeiten;
@@ -124,6 +128,17 @@ public class PokemonController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        Image buttonImage = new Image("back.png");
+        ImageView buttonView = new ImageView(buttonImage);
+        buttonView.setFitHeight(20);
+        buttonView.setFitWidth(20);
+        buttonView.setSmooth(true);
+        back.setGraphic(buttonView);
+
+
+
+
         fahigkeiten = new ArrayList<>();
         begegnungen = new ArrayList<>();
         indicator.setVisible(true);
@@ -171,12 +186,12 @@ public class PokemonController implements Initializable {
         try {
 
 
-            image.setFitHeight(300);
-            image.setFitWidth(300);
+            image.setFitHeight(250);
+            image.setFitWidth(250);
 
             image.setImage(RequestHandler.getImage(pr.getID()));
-            image.setX(-75);
-            image.setY(-50);
+            image.setX(-50);
+            image.setY(-25);
 
 
 
@@ -256,6 +271,7 @@ public class PokemonController implements Initializable {
     public void switchToScene() throws IOException {
 
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("select.fxml"))));
+        scene.getStylesheets().add(getClass().getResource("/fontstyles.css").toExternalForm());
         MainController.stage.setTitle("PokeAPI Implementation by Cüneyd");
         MainController.stage.setScene(scene);
 

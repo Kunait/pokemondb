@@ -1,0 +1,12 @@
+
+
+.list-cell {
+    -fx-control-inner-background: 	#F4A460 ;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
+    -fx-font-family: "VCR OSD Mono";
+}
+.list-cell:empty {
+    -fx-opacity: 0;
+}
+
+

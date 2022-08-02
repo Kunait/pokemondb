@@ -74,6 +74,7 @@ public class SelectController implements Initializable {
     public void switchToScene() throws IOException {
 
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("pokemon.fxml"))));
+        scene.getStylesheets().add(getClass().getResource("/fontstyles.css").toExternalForm());
         MainController.stage.setScene(scene);
         MainController.stage.setTitle("Pokemon View");
 

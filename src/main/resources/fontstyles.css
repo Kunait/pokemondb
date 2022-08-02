@@ -1,0 +1,12 @@
+
+
+
+
+.label {
+    -fx-font-family: 'VCR OSD Mono';
+    -fx-font-size: 20;
+}
+
+.button .text {
+    -fx-font-family: 'VCR OSD Mono';
+}

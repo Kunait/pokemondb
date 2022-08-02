@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -27,15 +29,18 @@ public class MainController extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        Font.loadFont(MainController.class.getResource("fonts/VCRMono.TTF").toExternalForm(), 15);
 
 
 
         Parent select = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("select.fxml")));
 
         Scene scene = new Scene(select);
+        scene.getStylesheets().add(getClass().getResource("/fontstyles.css").toExternalForm());
         MainController.stage = stage;
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image("icon.png"));
         stage.setTitle("PokeAPI Implementation by Cüneyd");
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
